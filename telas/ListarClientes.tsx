@@ -45,52 +45,74 @@ export default function ListarClientes() {
     }
  return (
     <>
+      <View style={styles.container}>
         <View style={styles.bloco}>
             <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('TelaCad' as never)}>
-                <Text style={styles.txtBtn}>Cadastrar Novo Cliente</Text>
+                <Text style={styles.txtBtn}>Novo Cliente</Text>
             </TouchableOpacity>
         </View>
 
-        <View style={styles.bloco}>
-            <Text style={styles.titulo}> Lista de Clientes </Text>
+          <View style={styles.bloco}>
+              <Text style={styles.titulo}> Lista dos Clientes</Text>
 
-            <FlatList 
-                data={clientes}
-                keyExtractor={(item)=> String(item.id)}
-                renderItem={({item})=><Cliente nome={item.nome} cpf={item.cpf} saldo={item.saldo} 
-                id={item.id} onExcluir={()=>excluir(item.id)} onEditar={()=>editar(item)}/>}
-                style={styles.lista}
-            />
-
-        </View>       
+              <FlatList 
+                  data={clientes}
+                  keyExtractor={(item)=> String(item.id)}
+                  renderItem={({item})=><Cliente nome={item.nome} cpf={item.cpf} saldo={item.saldo} 
+                  id={item.id} onExcluir={()=>excluir(item.id)} onEditar={()=>editar(item)}/>}
+                  style={styles.lista}
+              />
+          </View>  
+      </View>     
     </>   
   );
 }
 
 const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    backgroundColor: '#161616',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: 40,
+  },
   titulo:{
-    fontSize:20,
+    fontSize:30,
     fontWeight:'bold',
     textAlign:'center',
-    marginTop:20
+    marginTop:10,
+    marginBottom:10,
+    color: '#fff'
   },
   btn:{
-    backgroundColor:'#669988',
-    marginLeft:'10%',
-    marginRight:'10%',
-    marginTop:20,
-    padding:20,
-    borderRadius:20
+    backgroundColor:'#9023FF',
+    padding:10,
+    borderRadius:20,
+    width:'90%',
+    marginHorizontal: 10,
+    shadowColor: '#9023FF', 
+    shadowOffset: { width: 0, height: 4 }, 
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+    elevation: 10,
   },
   txtBtn:{
     textAlign:'center',
-    fontSize:20
+    fontSize:20,
+    color: '#fff',
+    fontWeight: 'bold'
   },
   bloco:{
-    width:'100%'
+    width:'100%',
+    justifyContent:'center',
+    alignItems:'center',
   },
   lista:{
-    width:'80%',
-    height:'70%'
+    width:'90%',
+    height:'80%',
+    borderWidth: 4,
+    borderRadius: 20,
+    borderColor: '#3f3f3f',
+    padding: 20
   }
 });
