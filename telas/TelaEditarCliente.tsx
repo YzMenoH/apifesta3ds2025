@@ -5,7 +5,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 
 import api from '../components/Api';
 
-export default function TelaEditar() {
+export default function TelaEditarCliente() {
 
 type ClienteType = {id:number, nome: string, cpf: string, saldo: number};
 
@@ -22,36 +22,50 @@ const {cliente} = route.params as {cliente: ClienteType};
  return (
     <>
         <View style={styles.container}>
-              <Text>Editar Cadastro do Cliente</Text>
+              <Text style={styles.titulo}>Editar Cadastro</Text>
         
               <View style={styles.bloco}>
                 <TextInput 
-                    placeholder='ID ...'
+                    style={styles.input}
+                    placeholder='ID'
+                    placeholderTextColor="#161616"
                     value={id}
                     onChangeText={(value)=>setId(value)}
                     editable={false}
                 />
                 
                 <TextInput 
-                    placeholder='Digite seu nome ...'
+                    style={styles.input}
+                    placeholder='Digite seu nome'
+                    placeholderTextColor="#161616"
                     value={nome}
                     onChangeText={(value)=>setNome(value)}
                 />
 
-                <TextInput 
-                    placeholder='Digite seu CPF ...'
+                <TextInput
+                    style={styles.input}
+                    placeholder='Digite seu CPF'
+                    placeholderTextColor="#161616"
                     value={cpf}
                     onChangeText={(value)=>setCpf(value)}
                 />
 
 
                 <TextInput 
-                    placeholder='Digite o saldo ...'
+                    style={styles.input}
+                    placeholder='Digite o saldo'
+                    placeholderTextColor="#161616"
                     value={saldo}
                     onChangeText={(value)=>setSaldo(value)}
-                />
-
-                <TouchableOpacity  style={styles.btn}>
+                    />
+              </View>
+              <View style={styles.botoes}>
+                <TouchableOpacity style={styles.btnCancelar}
+                onPress={() => navigation.goBack()}
+                >
+                  <Text style={styles.txtBtn}>Cancelar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity  style={styles.btnAlterar}>
                   <Text style={styles.txtBtn} onPress={async ()=> {
                     try{
                         const resp = await api.put('clientes',{
@@ -69,12 +83,13 @@ const {cliente} = route.params as {cliente: ClienteType};
                     }
                         
                     }
-                  >Salvar Alterações</Text>
+                  >Alterar</Text>
                 </TouchableOpacity>
+              </View>
+                
         
                 
         
-              </View>
             </View>
 
    </>
@@ -84,27 +99,64 @@ const {cliente} = route.params as {cliente: ClienteType};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#161616',
     alignItems: 'center',
     justifyContent: 'center',
   },
   titulo:{
-    fontSize:30,
-    fontWeight:'bold'
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#fff'
   },
   bloco:{
     marginLeft:'10%',
     marginRight:'10%',
     width:'80%',    
   },
-  btn:{
-    backgroundColor:"#6691d6ff",
-    width:'100%',
-    marginTop:20,
-    borderRadius:20,
+  btnCancelar:{
+    marginTop: 20,
+    backgroundColor: '#ff5555',
+    padding: 10,
+    borderRadius: 20,
+    width: '35%',
+    alignSelf: 'center',
+    shadowColor: '#ff5555',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+    elevation: 5,
+    marginHorizontal: 5,
+  },
+  btnAlterar:{
+    marginTop: 20,
+    backgroundColor: '#479df3ff',
+    padding: 10,
+    borderRadius: 20,
+    width: '35%',
+    alignSelf: 'center',
+    shadowColor: '#479df3ff',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+    elevation: 5,
+    marginHorizontal: 5,
   },
   txtBtn:{
-    textAlign:'center',
-    fontSize:25
-  }
+    textAlign: 'center',
+    fontSize: 20,
+    color: '#fff',
+    fontWeight: 'bold'
+  },
+  input: {
+    backgroundColor: '#3f3f3f',
+    borderRadius: 15,
+    color: '#fff',
+    marginVertical: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  botoes:{
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
 });

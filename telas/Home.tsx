@@ -24,7 +24,8 @@ export default function Home() {
               <Text style={styles.txtBtn}>Clientes</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn}
+            onPress={()=>navigation.navigate('ListarUsuarios' as never)}>
               <Text style={styles.txtBtn}>Usuários</Text>
           </TouchableOpacity>
         </View>

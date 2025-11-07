@@ -8,15 +8,18 @@ import { View,Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import Home from './telas/Home';
 import ListarClientes from './telas/ListarClientes';
-import TelaCad from './telas/TelaCad';
-import TelaEditar from './telas/TelaEditar';
+import ListarUsuarios from './telas/ListarUsuarios';
+import TelaCadCliente from './telas/TelaCadCliente';
+import TelaCadUsuario from './telas/TelaCadUsuario';
+import TelaEditarCliente from './telas/TelaEditarCliente';
+import TelaEditarUsuario from './telas/TelaEditarUsuario';
 
 const RootStack = createNativeStackNavigator({
   screens: {
     Home: {
       screen: Home,
       options:{
-        title:'Up! Eventos'
+        title:'Up! Eventos Admin'
       },
     },
     ListarClientes:{
@@ -25,16 +28,34 @@ const RootStack = createNativeStackNavigator({
         title:'Todos seus Clientes'
       },
     },
-    TelaCad:{
-      screen: TelaCad,
+    ListarUsuarios:{
+      screen: ListarUsuarios,
+      options:{
+        title:'Todos seus Usuários'
+      },
+    },
+    TelaCadCliente:{
+      screen: TelaCadCliente,
       options:{
         title:'Cadastro Clientes'
       },
     },
-    TelaEditar:{
-      screen: TelaEditar,
+    TelaCadUsuario:{
+      screen: TelaCadUsuario,
+      options:{
+        title:'Cadastro Usuários'
+      },
+    },
+    TelaEditarCliente:{
+      screen: TelaEditarCliente,
       options:{
         title:'Alterar cadastro de Cliente'
+      },
+    },
+    TelaEditarUsuario:{
+      screen: TelaEditarUsuario,
+      options:{
+        title:'Alterar cadastro do Usuário'
       },
     },
   },

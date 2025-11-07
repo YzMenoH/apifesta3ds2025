@@ -1,22 +1,21 @@
 import { View,Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-interface propCliente{
+interface propUsuario{
     id:number,
     nome:String,
-    cpf:String,
-    saldo:number,
+    login:String,
+    senha:String,
     onExcluir?: () => void,
     onEditar?: () => void
 }
 
-export default function Cliente({id, nome, cpf, saldo,  onExcluir, onEditar}:propCliente) {
+export default function Usuario({id, nome, login, senha,  onExcluir, onEditar}:propUsuario) {
  return (
    <>
         <View style={styles.bloco}>
             <Text style={styles.texto}>Cod.: {id}</Text>
             <Text style={styles.texto}>Nome: {nome}</Text>
-            <Text style={styles.texto}>CPF: {cpf}</Text>
-            <Text style={styles.texto}>Saldo: {saldo}</Text>
+            <Text style={styles.texto}>Login: {login}</Text>
 
             <View style={styles.row}>
                 <TouchableOpacity style={styles.btnExcluir}  onPress={onExcluir}>

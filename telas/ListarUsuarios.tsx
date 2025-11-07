@@ -1,73 +1,72 @@
 import { useState, useEffect } from 'react';
 import { View, FlatList, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 
-import Cliente from '../components/Cliente';
-
 import api from '../components/Api';
+import Usuario from '../components/Usuario';
 
 import {useNavigation,} from '@react-navigation/native';
 
-type ClienteType = { id: number; nome: string; cpf: string; saldo: number };
+type UsuarioType = { id: number; nome: string; login: string; senha: string };
 
-export default function ListarClientes() {
+export default function ListarUsuarios() {
 
     const navigation = useNavigation();
 
-    const [clientes, setCliente] = useState<ClienteType[]>([]);
+    const [usuario, setUsuario] = useState<UsuarioType[]>([]);
 
-    async function buscaClientes(){
-        const response = await api.get('clientes');
-        setCliente(response.data);
+    async function buscaUsuarios(){
+        const response = await api.get('usuarios');
+        setUsuario(response.data);
     }
 
     useEffect(
         ()=>{
-            buscaClientes();
+            buscaUsuarios();
         },[]
     );
 
     async function excluir(id: number) {
             try {
-               const r = await api.delete(`clientes/${id}`);
+               const r = await api.delete(`usuarios/${id}`);
 
                 Alert.alert(
                 "Excluir",`${JSON.stringify(r.data)}`
                 );
 
-                await buscaClientes();
+                await buscaUsuarios();
             } catch (e: any) {
                 Alert.alert("Erro ao excluir", e?.message ?? "Erro desconhecido");
             }
     }
 
-    function editar(item: ClienteType){
-      navigation.navigate('TelaEditarCliente' as never, {cliente : item} as never);
+    function editar(item: UsuarioType){
+      navigation.navigate('TelaEditarUsuario' as never, {usuario : item} as never);
     }
  return (
     <>
       <View style={styles.container}>
           <View style={styles.bloco}>
-              <Text style={styles.titulo}> Lista dos Clientes</Text>
+              <Text style={styles.titulo}> Lista dos Usuários</Text>
 
               <FlatList 
-                  data={clientes}
+                  data={usuario}
                   keyExtractor={(item)=> String(item.id)}
-                  renderItem={({item})=><Cliente nome={item.nome} cpf={item.cpf} saldo={item.saldo} 
+                  renderItem={({item})=><Usuario nome={item.nome} login={item.login} senha={item.senha} 
                   id={item.id} onExcluir={()=>excluir(item.id)} onEditar={()=>editar(item)}/>}
                   style={styles.lista}
               />
           </View>  
           <View style={styles.bloco}>
             <View style={styles.desc}>
-              <Text style={styles.desCliente}>
-              Quer criar um novo cliente?
+              <Text style={styles.desUsuario}>
+              Quer criar um novo usuário?
               </Text>
-              <Text style={styles.desCliente}>
-              Então vá em "Novo Cliente"
+              <Text style={styles.desUsuario}>
+              Então vá em "Novo Usuário"
               </Text>
             </View>
-            <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('TelaCadCliente' as never)}>
-                <Text style={styles.txtBtn}>Novo Cliente</Text>
+            <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate('TelaCadUsuario' as never)}>
+                <Text style={styles.txtBtn}>Novo Usuário</Text>
             </TouchableOpacity>
           </View>
       </View>     
@@ -153,7 +152,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 5, 
   },
-  desCliente:{
+  desUsuario:{
     color: '#fff',
     textAlign: 'center',
     fontSize: 22,
